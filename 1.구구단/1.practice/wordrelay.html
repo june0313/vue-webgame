@@ -1,0 +1,50 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <div>
+            {{word}}
+        </div>
+        <form v-on:submit="onSubmitForm">
+            <input type="text" v-model="value" ref="answerInput">
+            <button type="submit">입력</button>
+        </form>
+        <div>
+            {{result}}
+        </div>
+    </div>
+    <script>
+        const app = new Vue({
+            el: "#root",
+            data: {
+                word: '선영',
+                result: '',
+                value: ''
+            },
+            methods: {
+                onSubmitForm(event) {
+                    event.preventDefault();
+                    
+                    if (this.word[this.word.length - 1] == this.value[0]) {
+                        this.result = "정답";
+                        this.word = this.value;
+                    } else {
+                        this.result = "땡";
+                    }
+
+                    this.value = "";
+                    this.$refs.answerInput.focus();
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
